@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Comments</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🛡️ Secure Comment Wall</h1>
+
+    <form method="POST">
+        <textarea name="content" placeholder="Write your comment here..." rows="4" cols="50"></textarea><br>
+        <button type="submit">Post Comment</button>
+    </form>
+
+    <h2>📝 Comments (Sanitized)</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment[0] }}</li>  <!-- Escaped automatically by Jinja2 -->
+        {% endfor %}
+    </ul>
+</body>
+</html>

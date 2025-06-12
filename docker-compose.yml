@@ -1,0 +1,34 @@
+services:
+
+  waf:
+    image: owasp/modsecurity-crs:nginx
+    container_name: waf
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+      - ./waf/modsecurity.conf:/etc/nginx/modsecurity.conf
+      - ./waf/crs-setup.conf:/etc/nginx/crs-setup.conf:ro
+      - ./waf/rules:/etc/nginx/rules:ro
+    networks:
+      - app
+    depends_on:
+      - sqli-vuln
+      - xss-vuln
+
+  sqli-vuln:
+    build: ./sqli-vuln
+    expose:
+      - "5000"
+    networks:
+      - app
+
+  xss-vuln:
+    build: ./xss-vuln
+    expose:
+      - "5000"
+    networks:
+      - app
+
+networks:
+  app:

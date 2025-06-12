@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Community Comments</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Leave a Comment</h1>
+    <form method="POST">
+        <textarea name="comment" placeholder="Write something..."></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>All Comments:</h2>
+    <div>
+        {% for c in comments %}
+            <p>{{ c|safe }}</p> <!-- ❗️XSS here (|safe bypasses escaping) -->
+        {% endfor %}
+    </div>
+</body>
+</html>
