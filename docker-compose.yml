@@ -6,10 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/nginx.conf
-      - ./waf/modsecurity.conf:/etc/nginx/modsecurity.conf
-      - ./waf/crs-setup.conf:/etc/nginx/crs-setup.conf:ro
-      - ./waf/rules:/etc/nginx/rules:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/waf.conf
     networks:
       - app
     depends_on:
